@@ -4,6 +4,7 @@ import requests
 import json
 
 def parse_top_reviewers():
+	# finds the urls of the top reviewers
 	page = requests.get('https://www.beeradvocate.com/members/?sort=beers')
 	tree = html.fromstring(page.content)
 	user_urls = []
@@ -28,6 +29,7 @@ def parse_reviews(user):
 			return reviews
 
 		for row in rows:
+			# get the relevant data
 			data = row.find_all('td')
 			name = data[2].find_all('a')[0].text
 			brewery = data[2].find_all('a')[1].text
